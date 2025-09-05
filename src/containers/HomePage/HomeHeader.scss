@@ -62,11 +62,14 @@
                 }
             }
 
-            .language-vn {
+            .language-vi {
+                margin-right: 10px;
                 cursor: pointer;
 
                 &.active {
-                    color: orange;
+                    span {
+                        color: orange;
+                    }
                 }
 
             }
@@ -76,7 +79,9 @@
                 cursor: pointer;
 
                 &.active {
-                    color: blue;
+                    span {
+                        color: blue;
+                    }
                 }
             }
 
@@ -145,6 +150,7 @@
         align-items: flex-end;
         justify-content: center;
         background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+        padding-bottom: 10px;
 
         .options {
             text-align: center;
