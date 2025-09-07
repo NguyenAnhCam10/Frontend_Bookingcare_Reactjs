@@ -1,59 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
-import medalImg from "../../../assets/section-medical-facility/ChoRay.jpg"
-class MedicalFacility extends Component {
+
+import handbookImg from "../../../assets/handbook/camnang.jpg"
+class HandBook extends Component {
 
     render() {
 
         return (
-            <div className='section-share section-medical-facility'>
+            <div className='section-share handbook'>
                 <div className='section-content'>
                     <div className='section-header'>
-                        <span className='title-section'>Bác sĩ nổi bật</span>
+                        <span className='title-section'>Cẩm nang</span>
                         <button className='btn-section'>XEM THÊM </button>
                     </div>
                     <div className='section-mid'>
                         <Slider {...this.props.settings}>
                             <div className='specialty-body'>
-                                <div className="img-container MedicalFacility">
-                                    <img src={medalImg} />
+                                <div className="img-container handbook">
+                                    <img src={handbookImg} />
                                 </div>
 
                                 <div>Cơ xương khớp</div>
                             </div>
                             <div className='specialty-body'>
-                                <div className="img-container MedicalFacility">
-                                    <img src={medalImg} />
+                                <div className="img-container">
+                                    <img src={handbookImg} />
+                                </div>
+
+                                <div>Cơ xương khớp</div>
+                            </div>
+
+                            <div className='specialty-body'>
+                                <div className="img-container">
+                                    <img src={handbookImg} />
                                 </div>
 
                                 <div>Cơ xương khớp</div>
                             </div>
                             <div className='specialty-body'>
-                                <div className="img-container MedicalFacility">
-                                    <img src={medalImg} />
+                                <div className="img-container">
+                                    <img src={handbookImg} />
                                 </div>
 
                                 <div>Cơ xương khớp</div>
                             </div>
                             <div className='specialty-body'>
-                                <div className="img-container MedicalFacility">
-                                    <img src={medalImg} />
-                                </div>
-
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container MedicalFacility">
-                                    <img src={medalImg} />
-                                </div>
-
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container MedicalFacility">
-                                    <img src={medalImg} />
+                                <div className="img-container">
+                                    <img src={handbookImg} />
                                 </div>
 
                                 <div>Cơ xương khớp</div>
@@ -62,6 +58,7 @@ class MedicalFacility extends Component {
                     </div>
                 </div>
             </div>
+
         );
     }
 
@@ -69,7 +66,8 @@ class MedicalFacility extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 
@@ -78,4 +76,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default connect(mapStateToProps, mapDispatchToProps)(HandBook);
