@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
 import medalImg from "../../../assets/out-standing-doctor/doctor1.png"
+import * as actions from '../../../store/actions'
 class OutStandingDoctor extends Component {
 
-    render() {
+    componentDidMount() {
+        this.props.loadTopDoctor();
+    }
 
+    render() {
+        console.log('check props docto: ', this.props.topDoctorsRedux)
         return (
             <div className='section-share out-standing-doctor'>
                 <div className='section-content'>
@@ -73,12 +78,14 @@ class OutStandingDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        topDoctorsRedux: state.admin.topDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        loadTopDoctor: () => dispatch(actions.fetchTopDoctor())
     };
 };
 
