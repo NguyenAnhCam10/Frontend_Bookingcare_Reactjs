@@ -60,6 +60,11 @@
         "position": "Chức danh",
         "save": "Lưu người dùng",
         "role": "vai trò",
-        "image": "Ảnh đại diện"
+        "image": "Ảnh đại diện",
+        "edit": "Lưu thay đổi"
+    },
+    "homepage": {
+        "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+        "more-infor": "XEM THÊM"
     }
 }

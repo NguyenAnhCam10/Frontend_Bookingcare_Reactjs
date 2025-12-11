@@ -10,15 +10,19 @@ import About from './Section/About';
 import './HomePage.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { after } from 'lodash';
 class HomePage extends Component {
+    handleAterChange = () => {
 
+    }
     render() {
         let settings = {
             dots: false,
             infinite: true,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            afterChange: this.handleAterChange
         };
         return (
             <div>

@@ -1,6 +1,6 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, creatNewUserService, getTopDoctorHomeService, } from '../../services/userService';
-
+import { getAllCodeService, creatNewUserService, getTopDoctorHomeService, getAllUsers, deleteUserService, editUserService } from '../../services/userService';
+import { toast } from 'react-toastify';
 
 // export const fetchGenderStart = () => ({
 
@@ -97,8 +97,9 @@ export const creatNewUser = (data) => {
             console.log('check create user', res)
 
             if (res && res.errCode === 0) {
-
+                toast.success('Creat a new user succeed!')
                 dispatch(saveUserSuccess())
+                dispatch(fetchAllUsersStart())
 
             } else {
                 dispatch(saveUserFailed());
@@ -110,15 +111,15 @@ export const creatNewUser = (data) => {
     }
 }
 export const saveUserSuccess = () => ({
-    type: 'CREATE_USER_SUCCESS'
+    type: actionTypes.CREATE_USER_SUCCESS
 })
 export const saveUserFailed = () => ({
-    type: 'CREATE_USER_FAILED'
+    type: actionTypes.CREATE_USER_FAILED
 })
 export const fetchTopDoctor = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await getTopDoctorHomeService('2');
+            let res = await getTopDoctorHomeService('All');
             console.log('check adminAction', res)
             if (res && res.errCode === 0) {
                 dispatch({
@@ -140,3 +141,97 @@ export const fetchTopDoctor = () => {
         }
     }
 }
+export const fetchAllUsersStart = () => {
+
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await getAllUsers("All")
+
+            if (res && res.errCode === 0) {
+
+                dispatch(fetchAllUsersSuccess(res.users.reverse()))
+
+            } else {
+                toast.error('Fetch all user error!')
+
+                dispatch(fetchAllUsersFailed());
+            }
+        } catch (e) {
+            toast.error('Fetch all user error!')
+
+            dispatch(fetchAllUsersFailed());
+            console.log("fetchAllUsersErr: ", e)
+        }
+    }
+}
+export const fetchAllUsersSuccess = (data) => ({
+    type: actionTypes.FECTH_ALL_USERS_SUCCESS,
+    users: data
+})
+export const fetchAllUsersFailed = () => ({
+    type: actionTypes.FECTH_ALL_USERS_FAILDED,
+
+})
+export const deleteAUser = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await deleteUserService(userId);
+
+
+            if (res && res.errCode === 0) {
+                toast.success('Delete the user succeed!')
+                dispatch(deleteUserSuccess())
+                dispatch(fetchAllUsersStart())
+
+            } else {
+                toast.error('Delete the user error!')
+
+                dispatch(deleteUserFailed());
+            }
+        } catch (e) {
+            toast.error('Delete the user error!')
+
+            dispatch(deleteUserFailed());
+            console.log("fetchGenderErr: ", e)
+        }
+    }
+}
+export const deleteUserSuccess = () => ({
+    type: actionTypes.DELETE_USER_SUCCESS
+})
+export const deleteUserFailed = () => ({
+    type: actionTypes.DELETE_USER_FAILED
+})
+export const editAUser = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await editUserService(data);
+            console.log('chck edit', res)
+
+            if (res && res.errCode === 0) {
+                toast.success('Update the user succeed!')
+                dispatch(editUserSuccess())
+                dispatch(fetchAllUsersStart())
+
+            } else {
+                toast.error('Update the user error!')
+
+                dispatch(editUserFailed());
+            }
+        } catch (e) {
+            toast.error('Update the user error!')
+
+            dispatch(editUserFailed());
+            console.log("fetchGenderErr: ", e)
+        }
+    }
+}
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS
+})
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED
+})

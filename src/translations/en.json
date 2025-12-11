@@ -60,6 +60,11 @@
         "position": "Position",
         "save": "Save user",
         "role": "Role",
-        "image": "Avatar"
+        "image": "Avatar",
+        "edit": "Edit user"
+    },
+    "homepage": {
+        "outstanding-doctor": "Last week's featured doctor",
+        "more-infor": "MORE INFOR"
     }
 }
