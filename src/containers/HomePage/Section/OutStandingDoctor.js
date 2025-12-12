@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { LANGUAGES } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
-
+import { withRouter } from 'react-router';
 import * as actions from '../../../store/actions'
+import { push } from 'connected-react-router';
 class OutStandingDoctor extends Component {
+
 
     constructor(props) {
         super(props)
@@ -18,24 +20,26 @@ class OutStandingDoctor extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
             this.setState({
-                arrDoctor: this.props.topDoctorsRedux.data || []
+                arrDoctor: this.props.topDoctorsRedux || []
             })
+
             console.log('topDoctorsRedux', this.props.topDoctorsRedux);
 
         }
     }
     componentDidMount() {
         this.props.loadTopDoctor();
-        console.log('topDoctorsRedux', this.props.topDoctorsRedux)
+    }
+    handleViewDetailDoctor = (doctor) => {
+        console.log('view', doctor)
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
     }
 
     render() {
         let { language } = this.props;
         let arrDoctor = this.state.arrDoctor;
         console.log('check bs', arrDoctor)
-        // if (arrDoctor.length > 0) {
-        //     arrDoctor = arrDoctor.concat(Array(10 - arrDoctor.length).fill(arrDoctor[0]));
-        // }
+
 
         return (
             <div className='section-share out-standing-doctor'>
@@ -63,7 +67,7 @@ class OutStandingDoctor extends Component {
                                         : 'https://via.placeholder.com/150';
                                     console.log('arnh ', item.image)
                                     return (
-                                        <div className='specialty-body' key={index}>
+                                        <div className='specialty-body' key={index} onClick={() => this.handleViewDetailDoctor(item)}>
                                             <div className="img-container OutStandingDoctor">
                                                 <img src={imageSrc} alt="doctor" />
 
@@ -100,4 +104,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor));
