@@ -8,7 +8,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import './ManageDoctor.scss'
 import { Button } from 'reactstrap';
 import Select from 'react-select';
-import { LANGUAGES } from '../../../utils';
+import { CRUD_ACTIONS, LANGUAGES } from '../../../utils';
 import { getDetailInforDoctor } from '../../../services/userService'
 
 
@@ -72,11 +72,13 @@ class ManageDoctor extends Component {
         console.log('handleEditorChange', html, text);
     }
     handleSaveContentMarkdown = () => {
+        let { hasOldData } = this.state
         this.props.saveDetailDoctor({
             contentHTML: this.state.contentHTML,
             contentMarkdown: this.state.contentMarkdown,
             description: this.state.description,
-            doctorId: this.state.selectedOption.value
+            doctorId: this.state.selectedOption.value,
+            action: hasOldData === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
 
         })
     }
@@ -100,7 +102,6 @@ class ManageDoctor extends Component {
                 hasOldData: false,
             })
         }
-        console.log('check hafm handleChnage ', res)
 
     };
     handleOnChangeDesc = (event) => {

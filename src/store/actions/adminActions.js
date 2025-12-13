@@ -1,6 +1,7 @@
 import actionTypes from './actionTypes';
 import {
-    getAllCodeService, creatNewUserService, getTopDoctorHomeService, getAllUsers, deleteUserService, editUserService, getAllDoctors, saveDetailDoctorService
+    getAllCodeService, creatNewUserService, getTopDoctorHomeService, getAllUsers, deleteUserService, editUserService, getAllDoctors,
+    saveDetailDoctorService
 
 } from '../../services/userService';
 import { toast } from 'react-toastify';
@@ -291,6 +292,32 @@ export const saveDetailDoctor = (data) => {
 
             dispatch({
                 type: actionTypes.SAVE_DETAIL_DOCTOR_FAILDED
+            })
+        }
+    }
+}
+export const fetchAllScheduleTime = () => {
+    return async (dispatch, getState) => {
+
+        try {
+            let res = await getAllCodeService("TIME");
+
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FECTH_ALLCODE_SCHEDULE_HOUR_SUCCESS,
+                    dataTime: res.data
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FECTH_ALLCODE_SCHEDULE_HOUR_FAILDED
+                })
+            }
+
+
+        } catch (e) {
+            console.log('FECTH_ALLCODE_SCHEDULE_HOUR_FAILDED: ', e)
+            dispatch({
+                type: actionTypes.FECTH_ALLCODE_SCHEDULE_HOUR_FAILDED
             })
         }
     }

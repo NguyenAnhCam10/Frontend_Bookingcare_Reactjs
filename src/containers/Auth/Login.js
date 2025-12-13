@@ -4,7 +4,7 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
-import  {handleLoginApi} from '../../services/userService'
+import { handleLoginApi } from '../../services/userService'
 
 
 
@@ -12,7 +12,7 @@ import  {handleLoginApi} from '../../services/userService'
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             username: '',
             password: '',
             isShowPassword: false,
@@ -23,38 +23,38 @@ class Login extends Component {
         this.setState({
             username: event.target.value
         })
-        
+
     }
     handleOnChangePassword = (event) => {
         this.setState({
             password: event.target.value
         })
-        
+
     }
-    handleLogin = async( ) =>{
+    handleLogin = async () => {
         this.setState({
             errMessage: ''
         })
-        try{
-        let data =await handleLoginApi(this.state.username, this.state.password);
-        console.log('data', data)
-        if(data && data.errCode !==0 ){
-            this.setState({
-                errMessage: data.message
-            })
-        
-        }
-         if(data && data.errCode === 0 ){
-            
-            this.props.userLoginSuccess(data.user);           
-            console.log('succes!')
-            // this.setState({
-            //     errMessage: data.message
-            // })
-        
-        }
-            
-        }catch(error){
+        try {
+            let data = await handleLoginApi(this.state.username, this.state.password);
+            console.log('data', data)
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    errMessage: data.message
+                })
+
+            }
+            if (data && data.errCode === 0) {
+
+                this.props.userLoginSuccess(data.user);
+                console.log('succes!')
+                // this.setState({
+                //     errMessage: data.message
+                // })
+
+            }
+
+        } catch (error) {
             // if (error.response){
             //     if(error.response.data){
             //         this.setState({
@@ -75,9 +75,9 @@ class Login extends Component {
             // this.setState({
             //     errMessage: errMsg
             // });
-           
+
             console.log('anhcam', error.response)
-            
+
         }
     }
     handleShowHidePassword = () => {
@@ -86,47 +86,54 @@ class Login extends Component {
 
         })
     }
+    handleKyDown = (event) => {
+        if (event.key === 'Enter') {
+            this.handleLogin();
+        }
+    }
     render() {
-         
+
 
         return (
             <div className='login-background'>
                 <div className='login-container'>
                     <div className='login-content'>
                         <h2 className='title'>Đăng nhập</h2>
-                        
+
                         <div className='form-group'>
                             <label>Tài khoản</label>
                             <input
                                 type="text"
                                 placeholder="Nhập username"
-                                value = {this.state.username}
+                                value={this.state.username}
                                 onChange={(event) => this.handleOnChangeUsername(event)}
                             />
                         </div>
 
                         <div className='form-group'>
                             <label>Password:</label>
-                            <div className = 'custom-input-password'>
-                            <input
-                                className='form-control'
-                                type={this.state.isShowPassword ? 'text' : 'password'}
-                                placeholder="Nhập mật khẩu"
-                                value = {this.state.password}
-                                onChange={(event) => this.handleOnChangePassword(event)}
+                            <div className='custom-input-password'>
+                                <input
+                                    className='form-control'
+                                    type={this.state.isShowPassword ? 'text' : 'password'}
+                                    placeholder="Nhập mật khẩu"
+                                    value={this.state.password}
+                                    onChange={(event) => this.handleOnChangePassword(event)}
+                                    onKeyDown={(event) => this.handleKyDown(event)}
 
-                            />
-                            <span
-                                onClick={()=> {this.handleShowHidePassword()}}
-                            ><i className= {this.state.isShowPassword ? "fa-solid fa-eye" :"fa-solid fa-eye-slash" }></i></span>
-                            
+
+                                />
+                                <span
+                                    onClick={() => { this.handleShowHidePassword() }}
+                                ><i className={this.state.isShowPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i></span>
+
                             </div>
-                            
+
                         </div>
                         <div>
                             {this.state.errMessage}
                         </div>
-                        <button className='btn-login' onClick={() => {this.handleLogin()}}>Login</button>
+                        <button className='btn-login' onClick={() => { this.handleLogin() }}>Login</button>
                         <div>
                             <span className='forgot-password'>Quên mật khẩu?</span>
                         </div>
@@ -137,7 +144,7 @@ class Login extends Component {
                             <i className="fa-brands fa-google"></i>
                             <i className="fa-brands fa-facebook"></i>
                         </div>
-                        
+
                     </div>
 
                 </div>

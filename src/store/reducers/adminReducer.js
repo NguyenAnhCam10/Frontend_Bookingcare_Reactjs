@@ -8,6 +8,7 @@ const initialState = {
     topDoctors: [],
     users: [],
     allDoctors: [],
+    allScheduleTime: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -88,6 +89,17 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FECTH_ALL_DOCTORS_FAILDED:
             state.allDoctors = [];
+            return {
+                ...state
+            }
+
+        case actionTypes.FECTH_ALLCODE_SCHEDULE_HOUR_SUCCESS:
+            state.allScheduleTime = action.dataTime;
+            return {
+                ...state
+            }
+        case actionTypes.FECTH_ALLCODE_SCHEDULE_HOUR_FAILDED:
+            state.allScheduleTime = [];
             return {
                 ...state
             }
