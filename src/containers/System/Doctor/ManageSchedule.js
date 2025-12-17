@@ -11,7 +11,7 @@ import moment from 'moment';
 import FormattedDate from '../../../components/Formating/FormattedDate'
 import { toast } from 'react-toastify';
 import _ from 'lodash';
-
+import { saveBulkScheduleDoctor } from '../../../services/userService';
 class ManageSchedule extends Component {
     constructor(props) {
         super(props);
@@ -92,42 +92,64 @@ class ManageSchedule extends Component {
             })
         }
     }
-    handleSaveSchedule = () => {
-        let { rangTime, selectedDoctor, currentData } = this.state
-        let result = [];
-        if (selectedDoctor && _.isEmpty(selectedDoctor)) {
-            toast.error('Invalid selected doctor!')
-            return
-        }
-        if (!currentData) {
-            toast.error('Invalid date!')
-            return
+    handleSaveSchedule = async () => {
+        try {
+            let { rangTime, selectedDoctor, currentData } = this.state
+            let result = [];
+            if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+                toast.error('Invalid selected doctor!')
+                return
+            }
+            if (!currentData) {
+                toast.error('Invalid date!')
+                return
 
-        }
-        let FormattedDate = moment(currentData).format(dateFormat.SEND_TO_SERVER)
-        if (rangTime && rangTime.length > 0) {
-            let selectedTime = rangTime.filter(item => item.isSelected === true)
-            if (selectedTime && selectedTime.length > 0) {
-                selectedTime.map(schedule => {
-                    let object = {}
-                    object.doctorId = selectedDoctor.value;
-                    object.date = FormattedDate;
-                    object.time = schedule.keyMap;
-                    result.push(object)
+            }
+            // let FormattedDate = moment(currentData).format(dateFormat.SEND_TO_SERVER)
+            // let formattedDate = moment(currentData).format('YYYY-MM-DD')
+            let FormattedDate = new Date(currentData).getTime()
+            if (rangTime && rangTime.length > 0) {
+                let selectedTime = rangTime.filter(item => item.isSelected === true)
+                if (selectedTime && selectedTime.length > 0) {
+                    selectedTime.map(schedule => {
+                        let object = {}
+                        object.doctorId = selectedDoctor.value;
+                        object.date = FormattedDate;
+                        object.timeType = schedule.keyMap;
+                        result.push(object)
 
-                })
+                    })
 
+                } else {
+                    toast.error('Invalid selected time!')
+                    return;
+                }
+            }
+            let res = await saveBulkScheduleDoctor({
+                arrSchedule: result,
+                doctorId: selectedDoctor.value,
+                FormattedDate: FormattedDate
+            })
+            if (res && res.errCode === 0) {
+                toast.success('Save schedule successfully!')
             } else {
-                toast.error('Invalid selected time!')
-                return;
+                toast.error(res?.errMessage || 'Save schedule failed!')
+            }
+
+        } catch (error) {
+            console.error('handleSaveSchedule error:', error)
+
+            if (error?.errorMessage) {
+                toast.error(error.errorMessage)
+            } else {
+                toast.error('Save schedule failed!')
             }
         }
-        console.log('chyeck result ', result)
     }
     render() {
         let { rangTime } = this.state
         let { language } = this.props
-
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
         return (
 
             <div className='manage-schedule-container'>
@@ -148,8 +170,8 @@ class ManageSchedule extends Component {
                         <div className='col-6 form-group'>
                             <FormattedMessage id='manage-schedule.choose-day' />                             <DatePicker onChange={this.handleOnChangeDatePicker}
                                 className='form-control'
-                                value={this.state.currentData[0]}
-                                minDate={new Date()}
+                                value={this.state.currentData}
+                                minDate={new Date(yesterday)}
 
                             />
                         </div>
