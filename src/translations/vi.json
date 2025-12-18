@@ -82,6 +82,12 @@
             "no-schedule": "Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!",
             "choose": "Chọn",
             "book": "và đặt (miễn phí)"
+        },
+        "extra-infor-doctor": {
+            "address": "ĐỊA CHỈ PHÒNG KHÁM",
+            "exam-fee": "GIÁ KHÁM:",
+            "exam-fee-thuong": "Giá khám:",
+            "pay": "Người bệnh có thể thanh toán chi phí bằng hình thức:"
         }
     },
     "admin": {

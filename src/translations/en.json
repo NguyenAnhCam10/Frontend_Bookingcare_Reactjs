@@ -82,6 +82,12 @@
             "no-schedule": "There are no appointments available at this time, please choose a different time!",
             "choose": "Choose",
             "book": "and book (free)"
+        },
+        "extra-infor-doctor": {
+            "address": "CLINIC ADDRESS",
+            "exam-fee": "EXAMINATION FEE:",
+            "exam-fee-thuong": "Examination fee:",
+            "pay": "Patients can pay for their expenses using the following methods:"
         }
     },
     "admin": {
