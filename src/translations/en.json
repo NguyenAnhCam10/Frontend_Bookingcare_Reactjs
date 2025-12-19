@@ -86,8 +86,20 @@
         "extra-infor-doctor": {
             "address": "CLINIC ADDRESS",
             "exam-fee": "EXAMINATION FEE:",
-            "exam-fee-thuong": "Examination fee:",
+            "exam-fee-thuong": "Examination free:",
             "pay": "Patients can pay for their expenses using the following methods:"
+        },
+        "booking-modal": {
+            "name": "Name: ",
+            "number": "Phone number:",
+            "address": "Address:",
+            "reason": "Reason for examination:",
+            "birthday": "Birthday:",
+            "gender": "Gender:",
+            "infor-app": "Appointment scheduling information",
+            "comfirm": "Comfirm",
+            "cancel": "Cancel",
+            "free": "Free appointment"
         }
     },
     "admin": {

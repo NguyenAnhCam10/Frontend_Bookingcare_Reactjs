@@ -88,6 +88,18 @@
             "exam-fee": "GIÁ KHÁM:",
             "exam-fee-thuong": "Giá khám:",
             "pay": "Người bệnh có thể thanh toán chi phí bằng hình thức:"
+        },
+        "booking-modal": {
+            "name": "Họ tên: ",
+            "number": "Số điện thoại:",
+            "address": "Địa chỉ:",
+            "reason": "Lý do khám:",
+            "birthday": "Ngày sinh:",
+            "gender": "Giới tính",
+            "infor-app": "Thông tin đặt lịch khám bệnh",
+            "comfirm": "Xác nhận",
+            "cancel": "Trở về",
+            "free": "Miễn phí đặt lịch"
         }
     },
     "admin": {

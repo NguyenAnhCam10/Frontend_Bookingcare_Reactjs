@@ -106,7 +106,8 @@ class DoctorExtraInfor extends Component {
                                         {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.EN
                                             && <NumberFormat
                                                 className='currency'
-                                                value={extraInfor.priceTypeData.valueEn} displayType='text' thousandSeparator={true} suffix='$' />
+                                                value={extraInfor.priceTypeData.valueEn}
+                                                displayType='text' thousandSeparator={true} suffix='$' />
                                         }
 
 
