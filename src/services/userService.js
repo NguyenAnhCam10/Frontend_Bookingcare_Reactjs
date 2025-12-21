@@ -98,6 +98,32 @@ const getProfileDoctorById = (doctorId) => {
 const postPatientBookAppointment = (data) => {
     return axios.post(`/api/patient-book-appointment`, data);
 }
+
+const postVertyBookAppointmen = (data) => {
+    return axios.post(`/api/verify-book-appointment`, data);
+}
+
+const createNewSpecialty = (data) => {
+    const formData = new FormData();
+
+    formData.append('name', data.name);
+    formData.append('descriptionMarkdown', data.descriptionMarkdown);
+    formData.append('descriptionHTML', data.descriptonHTML);
+
+    if (data.image) {
+        formData.append('image', data.image);
+    }
+
+    return axios.post('/api/create-new-specialty', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    });
+};
+
+const getAllSpecialty = () => {
+    return axios.get(`/api/get-specialty`);
+
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -113,4 +139,5 @@ export {
     getScheduleDoctorByDate,
     getExtraInforDocTorById, getProfileDoctorById,
     postPatientBookAppointment,
+    postVertyBookAppointmen, createNewSpecialty, getAllSpecialty
 }

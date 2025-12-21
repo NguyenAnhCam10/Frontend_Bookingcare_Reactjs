@@ -5,61 +5,49 @@ import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
 
 import specialtyImg from "../../../assets/specialty/coxuongkhop.png"
+import { getAllSpecialty } from "../../../services/userService"
 class Specialty extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataSpecialty: []
+        }
+    }
+    async componentDidMount() {
+        let res = await getAllSpecialty();
 
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataSpecialty: res.data ? res.data : []
+            })
+        }
+    }
     render() {
+        let { dataSpecialty } = this.state
 
         return (
             <div className='section-share section-specialty'>
                 <div className='section-content'>
                     <div className='section-header'>
-                        <span className='title-section'>Chuyên khoa phổ biến</span>
-                        <button className='btn-section'>XEM THÊM </button>
+                        <span className='title-section'>< FormattedMessage id='homepage.specialty'></FormattedMessage></span>
+                        <button className='btn-section'><FormattedMessage id='homepage.more-infor'></FormattedMessage> </button>
                     </div>
                     <div className='section-mid'>
                         <Slider {...this.props.settings}>
-                            <div className='specialty-body'>
-                                <div className="img-container">
-                                    <img src={specialtyImg} />
-                                </div>
+                            {dataSpecialty && dataSpecialty.length > 0 &&
+                                dataSpecialty.map((item, index) => {
+                                    return (
+                                        <div className='specialty-body' key={index}>
+                                            <div className="img-container">
+                                                <img src={item.image} />
+                                            </div>
 
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container">
-                                    <img src={specialtyImg} />
-                                </div>
+                                            <div>{item.name}</div>
+                                        </div>
+                                    )
+                                })}
 
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container">
-                                    <img src={specialtyImg} />
-                                </div>
 
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container">
-                                    <img src={specialtyImg} />
-                                </div>
-
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container">
-                                    <img src={specialtyImg} />
-                                </div>
-
-                                <div>Cơ xương khớp</div>
-                            </div>
-                            <div className='specialty-body'>
-                                <div className="img-container">
-                                    <img src={specialtyImg} />
-                                </div>
-
-                                <div>Cơ xương khớp</div>
-                            </div>
                         </Slider>
                     </div>
                 </div>

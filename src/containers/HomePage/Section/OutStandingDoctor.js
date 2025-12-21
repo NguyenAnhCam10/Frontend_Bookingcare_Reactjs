@@ -67,7 +67,7 @@ class OutStandingDoctor extends Component {
                                     let imageSrc = item.image
                                         ? item.image
                                         : 'https://via.placeholder.com/150';
-                                    console.log('arnh ', item.image)
+
                                     return (
                                         <div className='specialty-body' key={index} onClick={() => this.handleViewDetailDoctor(item)}>
                                             <div className="img-container OutStandingDoctor">
