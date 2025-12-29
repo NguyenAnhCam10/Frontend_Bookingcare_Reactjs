@@ -23,7 +23,7 @@ class DoctorSchedule extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
     async componentDidMount() {
-        let { language } = this.props;
+        let { language, doctorId } = this.props;
         let allDays = []
         for (let i = 0; i < 7; i++) {
             let object = {};
@@ -42,6 +42,15 @@ class DoctorSchedule extends Component {
         this.setState({
             allDays: allDays,
         })
+        if (doctorId) {
+            let today = allDays[0].value; // ngày hôm nay
+            let res = await getScheduleDoctorByDate(doctorId, today);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    allAvalableTime: res.data || []
+                });
+            }
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

@@ -12,7 +12,7 @@ class DoctorExtraInfor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isShowDetailInfor: true,
+            isShowDetailInfor: false,
             extraInfor: {}
         }
 
@@ -34,7 +34,6 @@ class DoctorExtraInfor extends Component {
         if (this.props.language !== prevProps.language) {
 
         }
-        console.log(this.props.doctorId, prevProps.doctorId)
 
 
         if (this.props.doctorId !== prevProps.doctorId) {

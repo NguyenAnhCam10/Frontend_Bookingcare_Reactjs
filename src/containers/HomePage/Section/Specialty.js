@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
+import { Link } from 'react-router-dom';
 
-import specialtyImg from "../../../assets/specialty/coxuongkhop.png"
 import { getAllSpecialty } from "../../../services/userService"
+import { withRouter } from 'react-router';
+
 class Specialty extends Component {
     constructor(props) {
         super(props)
@@ -22,6 +24,11 @@ class Specialty extends Component {
             })
         }
     }
+    handleViewDetailSpecialty = (item) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-specialty/${item.id}`)
+        }
+    }
     render() {
         let { dataSpecialty } = this.state
 
@@ -33,11 +40,11 @@ class Specialty extends Component {
                         <button className='btn-section'><FormattedMessage id='homepage.more-infor'></FormattedMessage> </button>
                     </div>
                     <div className='section-mid'>
-                        <Slider {...this.props.settings}>
+                        {/* <Slider {...this.props.settings}>
                             {dataSpecialty && dataSpecialty.length > 0 &&
                                 dataSpecialty.map((item, index) => {
                                     return (
-                                        <div className='specialty-body' key={index}>
+                                        <div className='specialty-body' key={index} onClick={() => this.handleViewDetailSpecialty(item)}>
                                             <div className="img-container">
                                                 <img src={item.image} />
                                             </div>
@@ -48,7 +55,23 @@ class Specialty extends Component {
                                 })}
 
 
+                        </Slider> */}
+                        <Slider {...this.props.settings}>
+                            {dataSpecialty.map(item => (
+                                <div key={item.id} className="specialty-body">
+                                    <Link
+                                        to={`/detail-specialty/${item.id}`}
+                                        style={{ textDecoration: 'none', color: 'inherit' }}
+                                    >
+                                        <div className="img-container">
+                                            <img src={item.image} alt={item.name} />
+                                        </div>
+                                        <div>{item.name}</div>
+                                    </Link>
+                                </div>
+                            ))}
                         </Slider>
+
                     </div>
                 </div>
             </div>
@@ -70,4 +93,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Specialty));

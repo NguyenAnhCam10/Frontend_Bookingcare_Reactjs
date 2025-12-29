@@ -108,7 +108,7 @@ const createNewSpecialty = (data) => {
 
     formData.append('name', data.name);
     formData.append('descriptionMarkdown', data.descriptionMarkdown);
-    formData.append('descriptionHTML', data.descriptonHTML);
+    formData.append('descriptionHTML', data.descriptionHTML);
 
     if (data.image) {
         formData.append('image', data.image);
@@ -123,7 +123,30 @@ const getAllSpecialty = () => {
     return axios.get(`/api/get-specialty`);
 
 }
+const getAllDetailSpecialtyById = (data) => {
+    return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`);
 
+}
+const createNewClinic = (data) => {
+    const formData = new FormData();
+
+    formData.append('name', data.name);
+    formData.append('descriptionMarkdown', data.descriptionMarkdown);
+    formData.append('descriptionHTML', data.descriptionHTML);
+    formData.append('address', data.address);
+
+    if (data.image) {
+        formData.append('image', data.image);
+    }
+
+    return axios.post('/api/create-new-clinic', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    });
+};
+const getAllClinic = () => {
+    return axios.get(`/api/get-clinic`);
+
+}
 export {
     handleLoginApi,
     getAllUsers,
@@ -139,5 +162,9 @@ export {
     getScheduleDoctorByDate,
     getExtraInforDocTorById, getProfileDoctorById,
     postPatientBookAppointment,
-    postVertyBookAppointmen, createNewSpecialty, getAllSpecialty
+    postVertyBookAppointmen, createNewSpecialty, getAllSpecialty,
+    getAllDetailSpecialtyById,
+    createNewClinic,
+    getAllClinic
+
 }
