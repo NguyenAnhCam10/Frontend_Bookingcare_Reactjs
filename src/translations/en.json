@@ -48,7 +48,8 @@
             "manage-handbook": "Handbook management"
         },
         "doctor": {
-            "manage-schedule": "Manage medical appointment scheduling"
+            "manage-schedule": "Manage medical appointment scheduling",
+            "manage-patient": "Patient management"
         }
     },
     "manage-user": {

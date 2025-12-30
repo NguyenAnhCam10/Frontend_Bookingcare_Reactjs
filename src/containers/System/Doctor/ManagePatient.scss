@@ -1,0 +1,43 @@
+.manage-patient-container {
+    .m-p-title {
+        font-size: 15px;
+        margin: 10px 0;
+        text-align: center;
+        text-transform: uppercase;
+
+    }
+
+    .manage-patient-body {
+        padding: 0 20px;
+
+        .table-manage-patient {
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            button {
+                border: none;
+                outline: none;
+                cursor: pointer;
+            }
+
+            .mp-btn-comfirn {
+                background: orange;
+                margin-right: 10px;
+                height: 30px;
+                border-radius: 3px;
+            }
+
+            .mp-btn-remedy {
+                height: 30px;
+                border-radius: 3px;
+                background: #39dca0;
+            }
+        }
+    }
+
+}
