@@ -1,0 +1,33 @@
+.booking-modal-container {
+    min-width: 700px;
+
+    .Modal-header {
+        display: flex;
+        align-items: center;
+
+        .modal-title {
+            padding: 0 15px;
+        }
+
+        .close {
+            margin-left: auto;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    .modal-content {
+        border-radius: 8px;
+    }
+
+    .modal-header {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+
+    .modal-footer {
+        justify-content: flex-end;
+    }
+}

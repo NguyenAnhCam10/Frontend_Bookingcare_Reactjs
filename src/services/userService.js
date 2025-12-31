@@ -157,6 +157,16 @@ const getAllPatientForDoctor = (data) => {
 
 }
 
+// const postSendRemery = (data) => {
+//     return axios.post('/api/send-remery', data, {
+
+//     });
+// }
+const postSendRemery = (data) => {
+    return axios.post('/api/send-remery', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    }).then(res => res.data);
+}
 export {
     handleLoginApi,
     getAllUsers,
@@ -176,6 +186,6 @@ export {
     getAllDetailSpecialtyById,
     createNewClinic,
     getAllClinic,
-    getAllDetailClinicById, getAllPatientForDoctor
+    getAllDetailClinicById, getAllPatientForDoctor, postSendRemery
 
 }
